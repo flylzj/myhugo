@@ -3,7 +3,8 @@ services:
   nginx:
     image: nginx:latest
     volumes:
-      - ./public:/var/www/html/public:ro
+      - ./nginx.conf:/etc/nginx:ro
+      - ./public:/var/www/html/public
     ports:
       - "8002:80"
     
