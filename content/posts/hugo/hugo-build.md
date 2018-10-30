@@ -1,6 +1,9 @@
 ---
 title: "Hugo Build"
+showDate: true
 date: 2018-10-29T17:10:07+08:00
+tags: ["hugo", "linux"]
+draft: false
 ---
 
 # 记录学习hugo的过程
