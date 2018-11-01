@@ -6,5 +6,5 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./public:/var/www/html/public
     ports:
-      - "8002:80"
+      - "127.0.0.1:8002:80"
     
