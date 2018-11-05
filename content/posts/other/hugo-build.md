@@ -1,8 +1,8 @@
 ---
-title: "Hugo Build"
+title: "Hugo学习"
 showDate: true
 date: 2018-10-29T17:10:07+08:00
-tags: ["hugo", "linux"]
+tags: ["hugo"]
 draft: false
 ---
 
@@ -14,7 +14,7 @@ draft: false
 
 ### hugo的官网[点击链接](https://gohugo.io/)
 
-ubuntu的话直接 `$ sudo apt install hugo` 安装，但是这样安装会的版本很低，导致甚至连官方教程的主题都用不了。所以还是直接去下github上下在deb包安装吧。[下载地址](https://github.com/gohugoio/hugo/releases)
+ubuntu的话直接 `$ sudo apt install hugo` 安装，但是这样安装会的版本很低，导致甚至连官方教程的主题都用不了。所以还是直接去下github上下在deb包安装吧。[下载huo地址](https://github.com/gohugoio/hugo/releases)
 
 ### 二丶生成站点
 
