@@ -200,4 +200,43 @@ Treeview相当于是创建一个表格,由表头和列组成,每一行都算作�
 效果:
 ![treeview](../tkinter-treeview.png)
 
+## 部件装填
 
+部件通过grid， pack来实现布局管理，他们各有个的有点和缺点，因为不追求布局效果而且对ui硬伤，没怎么用上，这里用网上总结的。
+
+### pack
+
+pack给我的使用体验就是把部件一个一个堆到窗口上去，
+
+* fill 控件填充方式, 参数可以是tkinter.X和tkinter.Y,分别表示在X，Y方向和父窗口填充
+
+* padx 水平外部填充,参数是int
+
+* pady 垂直外部填充
+
+* ipadx 水平内部填充
+
+* ipady 垂直内部填充
+
+* side 按顺序填充,参数可以是 tkinter.LEFT, tkinter.RIGHT, tkinter.CENTER
+
+### grid
+
+grid给我的使用体验就是把窗口分成很多格子，然后把部件放到对应的格子
+
+* row 决定放在哪一行
+* column 决定放在哪一列
+
+## 说说关于这个小项目的MVC模式
+
+这个项目的大致就是使用MVC模式:
+view包下面的都是定义的窗口类，还有一些tk.StringVar()， tk.IntVar()。这些数据是和controller交互的媒介。
+table包下面定义的是sqlalchemy所需要的表类。
+model包下面定义的是操作数据的一些类。
+controller包下的controller类就是入口类了，它的构造函数里实例化了所有的view和model类。
+通过getvar（）方法从窗口拿到数据，然后把数据传给model类后返回结果，显示在view类中。
+
+## 最后
+
+代码虽然说是MVC，但是因为开始写得时候对tk的一些部件不是很熟，导致有点乱（我现在也不想改了qaq），因为tk我写的时候也不是很熟练，写完算是对tk也有了比较多的了解。
+太丑了也不想贴出来qaq~
