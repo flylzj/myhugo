@@ -31,6 +31,10 @@ hasCJKLanguage           = true
     text = "Python"
 
 [[params.mainMenu]]
+    link = "/posts/golang"
+    text = "Golang"
+
+[[params.mainMenu]]
     link = "/posts/life"
     text = "MyLife"
 
