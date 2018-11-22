@@ -77,7 +77,7 @@ func GetOnePageGoods(urlChan chan [2]string, goodChan chan Good, token string, w
 
 * 关于goroutine，就是前面的问题，我不知道怎么，什么时候去关闭goroutine，网上看到一篇《如何优雅的退出goroutine的博客》，里面有句话让我印象比较深刻，`当你开始一个goruntine的时候，一定要知道goruntine会在何时停止。`我这里关闭goroutine的方式就是它没有url需要处理的时候就会自己退出，这样100个goroutine慢慢的减少直到爬虫结束，goroutine全部结束。虽然效果是达到了但感觉还不是很优雅，我可能还需要去看看别人的代码，多写写。
 
-* 关于数据库，一开始我是从goodChan一个一个拿出good然后拼接sql，存入数据库，但是发现速度极慢，插入一条数据得花几百毫秒，爬虫都结束了还有也就插入了一千多条数据。然后我想到了多几个goroutine来插入数据，配上锁，还是很慢。找了各种sqlite的并发方法，都没有效果。后来想到如果我把所有的insert语句拼成一条insert语句，只执行一次sql，会怎样。然后woc，几百毫秒？
+* 关于数据库，一开始我是从goodChan一个一个拿出good然后拼接sql，存入数据库，但是发现速度极慢，插入一条数据得花几百毫秒，爬虫都结束了还有也就插入了一千多条数据。然后我想到了多几个goroutine来插入数据，配上锁，还是很慢。找了各种sqlite的并发方法，都没有效果。后来想到如果我把所有的insert语句拼成一条insert语句，只执行一次sql，这样肯定减少了很多系统的i／o开销。试了下，插入这几万条数据不到一秒。
 
 ```go
 func DomToDB(goodChan chan Good, wg *sync.WaitGroup) {
@@ -111,3 +111,7 @@ func DomToDB(goodChan chan Good, wg *sync.WaitGroup) {
 	defer wg.Done()
 }
 ```
+
+## 总结
+
+第一次使用golang，使用体验还不错，但是还是有挺多不懂的，都是边查边写，也没有用上什么go的特性。还需要多写写代码，关于数据库的设计也还需要再看一看。（溜了
