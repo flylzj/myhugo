@@ -2,5 +2,7 @@
     "default": true,
     "MD033": false,
     "MD013": false,
-    "no-hard-tabs": false
+    "no-hard-tabs": false,
+    "MD023": false,
+    "MD007": false
 }
