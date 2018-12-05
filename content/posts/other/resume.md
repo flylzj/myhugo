@@ -13,10 +13,11 @@ tags: ["resume"]
 * ## 个人信息：
     * ### 基本信息：
 
+        * 姓名：刘致君
         * 性别：男
         * 籍贯：江西景德镇
         * 电话：15170307370
-        * 邮箱：lzj14499@qq.com
+        * 邮箱：flylzj@qq.com
         * 个人博客：[flylzj](https://blog.ncu204.com) -> https://blog.ncu204.com
 
     * ### 教育经历：
