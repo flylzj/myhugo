@@ -12,7 +12,7 @@ hasCJKLanguage           = true
 [params]
     dateform            = "Mon Jan 2 2006 15:04:05"
     dateformfull        = "Mon Jan 2 2006 15:04:05 CCT"
-    favicon             = "hogo.ico"
+    favicon             = "hugo.ico"
     homepage            = "main"                        # What to call the home page link
     galleryFolder       = "images/"                     # Where you've put your images, after "/content/gallery/"
     clickablePhotos     = false                          # Allow links to the full size images

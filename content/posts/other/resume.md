@@ -32,13 +32,13 @@ tags: ["resume"]
 * ## 技能：
 
     * Python
-        * 熟练掌握Python
+        * 熟悉Python
         * 熟悉flask以及rest风格的第三方库flask-restful
         * 熟悉orm框架sqlalchemy的使用
         * 掌握Scrapy爬虫框架
         * 了解Python2
         * 了解并日常遵守PEP8规范
-        * 对pandas，numpy，matplotlib有多了解
+        * 对pandas，numpy，matplotlib有一定了解
 
     * Golang
 
