@@ -2,7 +2,7 @@
 title: "一份简历"
 date: 2018-12-05T16:44:07+08:00
 showDate: true
-draft: false
+draft: true
 tags: ["resume"]
 ---
 
