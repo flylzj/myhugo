@@ -44,7 +44,7 @@ hasCJKLanguage           = true
 
 [[params.mainMenu]]
     link = "/posts/algorithm"
-    text = "Algorithm"
+    text = "算法"
 
 [[params.mainMenu]]
     link = "/about"
