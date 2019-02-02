@@ -3,7 +3,7 @@ title: "最长字串"
 date: 2018-12-28T09:10:17+08:00
 showDate: true
 draft: false
-tags: ["algorithm","story"]
+tags: ["algorithm"]
 ---
 
 ## 2018-12-28

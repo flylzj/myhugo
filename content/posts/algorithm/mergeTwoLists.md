@@ -3,7 +3,7 @@ title: "合并两个有序链表"
 date: 2019-01-07T12:43:38+08:00
 showDate: true
 draft: false
-tags: ["blog","story"]
+tags: ["algorithm"]
 ---
 
 ## 2018-12-31
