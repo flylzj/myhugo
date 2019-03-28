@@ -1,51 +1,89 @@
-baseurl                 = "/"               # Your domain name. Must end with "/"
-languageCode            = "zh-cn"
-defaultContentLanguage  = "zh"
-isMultilingual          = true
-title                   = "fly thief"
-theme                   = "sam"
-pygmentsStyle           = "monokai"                     # https://help.farbox.com/pygments.html
-pygmentsCodefences      = true
-googleAnalytics         = "UA-123141655-2"             # Tracking code, eg. "UA-111111111-1"
-hasCJKLanguage           = true
+baseurl = "https://username.github.io"
+DefaultContentLanguage = "zh-cn"
+title = "flythief"
+theme = "beautifulhugo"
+metaDataFormat = "toml"
+pygmentsStyle = "trac"
+pygmentsUseClasses = true
+pygmentsCodeFences = true
+pygmentsCodefencesGuessSyntax = true
+#pygmentsUseClassic = true
+#pygmentOptions = "linenos=inline"
+disqusShortname = "XXX"
+#googleAnalytics = "XXX"
 
-[params]
-    dateform            = "Mon Jan 2 2006 15:04:05"
-    dateformfull        = "Mon Jan 2 2006 15:04:05 CCT"
-    favicon             = "favicon.ico"
-    homepage            = "main"                        # What to call the home page link
-    galleryFolder       = "images/"                     # Where you've put your images, after "/content/gallery/"
-    clickablePhotos     = true                          # Allow links to the full size images
-    smallPreviewImages   = true                         # Show small images from the subfolder instead of the big versions in the gallery
-                                                         # Note: This will only become active if clickablePhotos is also true.
-    smallImagesSubfolder = "small/"                      # The subfolder for the small versions of the images under the gallery (with trailing slash)
-                                                         # For each image the small version has to have the same filename as the big version.
-    footerText          = "Call me Sam, a theme for Hugo."
+[Params]
+#  homeTitle = "Beautiful Hugo Theme" # Set a different text for the header on the home page
+  subtitle = ""
+  logo = "./lzj.jpg"
+  favicon = "favicon.ico"
+  dateFormat = "Mon Jan 2 2006 15:04:05"
+  commit = false
+  rss = true
+  # comments = true
+  readingTime = true
+  wordCount = true
+  useHLJS = true
+  # socialShare = true
+  delayDisqus = true
+  showRelatedPosts = true
+#  gcse = "012345678901234567890:abcdefghijk" # Get your code from google.com/cse. Make sure to go to "Look and Feel" and change Layout to "Full Width" and Theme to "Classic"
 
-# Metadata
-    description         = " "            # Max 160 characters show in search results
-    primaryImage        = "lzj.jpg"                     # Image that shows on Twitter cards and OpenGraph links
+#[[Params.bigimg]]
+#  src = "img/triangle.jpg"
+#  desc = "Triangle"
+#[[Params.bigimg]]
+#  src = "img/sphere.jpg"
+#  desc = "Sphere"
+#  # position: see values of CSS background-position.
+#  position = "center top"
+#[[Params.bigimg]]
+#  src = "img/hexagon.jpg"
+#  desc = "Hexagon"
 
-[[params.mainMenu]]
-    link = "/posts/python"
-    text = "Python"
+[Author]
+  name = "flylzj"
+  website = "blog.ncu204.com"
+  email = "1449902124@qq.com"
+  github = "flylzj"
 
-[[params.mainMenu]]
-    link = "/posts/golang"
-    text = "Golang"
+[[menu.main]]
+    identifier = "blog"
+    name = "Blog"
+    url = ""
+    weight = 1
 
-[[params.mainMenu]]
-    link = "/posts/life"
-    text = "MyLife"
+[[menu.main]]
+    name = "About"
+    url = "about/"
+    weight = 3
 
-[[params.mainMenu]]
-    link = "/posts/other"
-    text = "Other"
+[[menu.main]]
+    parent = "blog"
+    identifier = "python"
+    name = "Python"
+    url = "posts/python"
+    weight = 1
 
-[[params.mainMenu]]
-    link = "/posts/algorithm"
-    text = "算法"
+[[menu.main]]
+    parent = "blog"
+    name = "Golang"
+    url = "posts/golang"
+    weight = 2
 
-[[params.mainMenu]]
-    link = "/about"
-    text = "关于我"
+[[menu.main]]
+    parent = "blog"
+    name = "algorithm"
+    url = "posts/algorithm"
+    weight = 3
+
+[[menu.main]]
+    parent = "blog"
+    name = "other"
+    url = "posts/other"
+    weight = 4
+
+[[menu.main]]
+    name = "Tags"
+    url = "tags"
+    weight = 3
