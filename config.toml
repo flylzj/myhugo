@@ -1,4 +1,4 @@
-baseurl = "https://username.github.io"
+# baseurl = "https://username.github.io"
 DefaultContentLanguage = "zh-cn"
 title = "flythief"
 theme = "beautifulhugo"
@@ -9,7 +9,6 @@ pygmentsCodeFences = true
 pygmentsCodefencesGuessSyntax = true
 #pygmentsUseClassic = true
 #pygmentOptions = "linenos=inline"
-disqusShortname = "XXX"
 #googleAnalytics = "XXX"
 
 [Params]
@@ -50,7 +49,7 @@ disqusShortname = "XXX"
 [[menu.main]]
     identifier = "blog"
     name = "Blog"
-    url = ""
+    url = "/"
     weight = 1
 
 [[menu.main]]
