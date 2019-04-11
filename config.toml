@@ -1,51 +1,94 @@
-baseurl                 = "https://blog.ncu204.com"               # Your domain name. Must end with "/"
-languageCode            = "zh-cn"
-defaultContentLanguage  = "zh"
-isMultilingual          = true
-title                   = "fly thief"
-theme                   = "sam"
-pygmentsStyle           = "monokai"                     # https://help.farbox.com/pygments.html
-pygmentsCodefences      = true
-googleAnalytics         = "UA-123141655-2"             # Tracking code, eg. "UA-111111111-1"
-hasCJKLanguage           = true
+baseurl             = "https://blog.ncu204.com"
+builddrafts         = false
+canonifyurls        = true
+contentdir          = "content"
+languageCode        = "zh-CN"
+layoutdir           = "layouts"
+publishdir          = "public"
+theme               = "cocoa"
+author              = "Fly Thief"
+title               = "Fly Thief"
+pygmentsuseclasses  = true
+# disqusshortname     = "cocoaexamplesite" # Comment out to disable Disqus.
+pluralizelisttitles = false
+googleAnalytics     = "UA-123-45"
+
+[permalinks]
+blog  = "blog/:slug/"
+
+[[menu.main]]
+name                   = "Code"
+weight                 = -120
+identifier             = "code"
+url                    = "/posts/code"
+
+[[menu.main]]
+name                   = "Algorithm"
+weight                 = -100
+identifier             = "Algorithm"
+url                    = "/posts/algorithm"
+
+[[menu.main]]
+name                   = "life"
+weight                 = -90
+identifier             = "life"
+url                    = "/posts/life"
+
+[[menu.main]]
+name                   = "other"
+weight                 = -90
+identifier             = "other"
+url                    = "/posts/other"
+
+[[menu.main]]
+name                   = "About"
+weight                 = 100
+identifier             = "about"
+url                    = "/about/"
+
 
 [params]
-    dateform            = "Mon Jan 2 2006 15:04:05"
-    dateformfull        = "Mon Jan 2 2006 15:04:05 CCT"
-    favicon             = "favicon.ico"
-    homepage            = "main"                        # What to call the home page link
-    galleryFolder       = "images/"                     # Where you've put your images, after "/content/gallery/"
-    clickablePhotos     = true                          # Allow links to the full size images
-    smallPreviewImages   = true                         # Show small images from the subfolder instead of the big versions in the gallery
-                                                         # Note: This will only become active if clickablePhotos is also true.
-    smallImagesSubfolder = "small/"                      # The subfolder for the small versions of the images under the gallery (with trailing slash)
-                                                         # For each image the small version has to have the same filename as the big version.
-    footerText          = "Call me Sam, a theme for Hugo."
+include_rss            = true                          # include RSS <link> tag in <head> and show RSS icon
+latestpostscount       = 5                             # how many posts to display on the home page
+i18n_flags             = true                         # whether to display small country flags for available translations
+author                 = "Fly Thief"
+cachebuster            = true                          # add the current unix timestamp in query string for cache busting css assets
+dateform               = "Jan 2, 2006"
+dateformfull           = "Mon Jan 2 2006 15:04:05 MST"
+description            = "Get Hungary"
+email                  = "1449902124@qq.com"
+extracssfiles          = []       # In your `static` directory, add/remove files as necessary.
+faviconfile            = "img/favicon.ico"
+github                 = "//github.com/flylzj"
+# instagram              = "//instagram.com/you"
+# px500                  = "//500px.com/username"
+lang                   = "zh"
+# linkedin               = "//linkedin.com/in/you"
+noshowreadtime         = true                         # if true, don't show "<x> minutes read" in posts
+selfintro              = "fly thief's blog"                            # appears in the site header when set to a non-empty string
+#twitter                = "//twitter.com/you"
+#mastodon               = "//example.com/@you"
+#telegram               = "//t.me/you"
 
-# Metadata
-    description         = " "            # Max 160 characters show in search results
-    primaryImage        = "lzj.jpg"                     # Image that shows on Twitter cards and OpenGraph links
+highlightjs            = true
+# highlightjslanguages = ["go", "python"]                        # additional languages not included in the "common" set
+highlightjsStyle     = "darcula"
 
-[[params.mainMenu]]
-    link = "/posts/python"
-    text = "Python"
+piwik                  = false                         # If true, Piwik integration is enabled
+# piwik_url            = "//www.example.com/piwik/"    # URL to your Piwik installation. Must End with a slash
+# piwik_id             = 2                             # Id of your site in Piwik
 
-[[params.mainMenu]]
-    link = "/posts/golang"
-    text = "Golang"
+gitalk                 = false
+# if gitalk is true, the following params should be set. These parameters could be retrieved from github OAuth
+gitalk_clientID        = "your client id"
+gitalk_clientSecret    = "your client secret"
+gitalk_repo            = "your repo url"
+gitalk_owner           = "the owner of this repo"
+gitalk_admin           = ['a', 'list', 'of', 'administrator']
 
-[[params.mainMenu]]
-    link = "/posts/life"
-    text = "MyLife"
+avatar                 = "img/lzj.jpg" # path to image in static dir e.g img/avatar.png (do not use in the same time as gravatar)
+# gravatar             = ""                # gravatar hash. see https://en.gravatar.com/site/implement/hash/. do not use in the same time as avatar
 
-[[params.mainMenu]]
-    link = "/posts/other"
-    text = "Other"
-
-[[params.mainMenu]]
-    link = "/posts/algorithm"
-    text = "算法"
-
-[[params.mainMenu]]
-    link = "/about"
-    text = "关于我"
+# The following are DEPRECATED.
+gatracker              = "XYZ" # use googleAnalytics instead
+initials               = "ad"  # displayed on single post page; deprecated in v0.3.0.
