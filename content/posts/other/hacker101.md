@@ -36,7 +36,7 @@ tags: ["blog","story"]
 
 ![2-2](./2-2.png)
 
-接着在textarea试了试`<script>alert('xss')</script>`, 虽然提交的是script， 看起来是后端把script替换成scrubbed。
+接着在textarea试了试`<script>alert('xss')</script>`, 虽然提交的是script， 看起来是后端把script替换成scrubbed。 
 
 然后试了一下`<BODY onload="alert('XSS')">`，成功爆出flag
 
