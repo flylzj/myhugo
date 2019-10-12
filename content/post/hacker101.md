@@ -67,6 +67,8 @@ categories: ["security"]
 
 #### 参考资料
 
+[常见xss过滤](https://damit5.com/2017/10/15/XSS-%E7%BB%95%E8%BF%87%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5/)
+
 ### 第三关 Micro-CMS v2 （1/3 flag）
 
 #### flag 1 
@@ -164,7 +166,7 @@ def get_username_word(idx, a):
 ![2-7](2-7.png)
 
 
-[常见xss过滤](https://damit5.com/2017/10/15/XSS-%E7%BB%95%E8%BF%87%E5%B8%B8%E7%94%A8%E8%AF%AD%E5%8F%A5/)
+
 
 未完待续~
 
