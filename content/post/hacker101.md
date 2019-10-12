@@ -3,7 +3,8 @@ title: "Hacker101"
 date: 2019-10-11T16:31:29+08:00
 showDate: true
 draft: false
-tags: ["blog","story"]
+tags: ["security","hacker", "ctf"]
+categories: ["security"]
 ---
 
 # hacker101学习笔记

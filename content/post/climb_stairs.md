@@ -3,7 +3,8 @@ title: "爬楼梯"
 date: 2019-01-07T10:56:51+08:00
 showDate: true
 draft: false
-tags: ["blog","story"]
+tags: ["算法"]
+categories: ["算法"]
 ---
 
 >假设你正在爬楼梯。需要 n 阶你才能到达楼顶。

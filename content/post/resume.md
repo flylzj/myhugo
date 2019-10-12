@@ -2,8 +2,9 @@
 title: "一份简历"
 date: 2018-12-05T16:44:07+08:00
 showDate: true
-draft: true
+draft: false
 tags: ["resume"]
+categories: ["resume"]
 ---
 
 # 个人简历

@@ -3,7 +3,8 @@ title: "Flask Restful"
 date: 2018-12-13T13:54:30+08:00
 showDate: true
 draft: false
-tags: ["python","flask"]
+tags: ["Python","flask"]
+categories: ["python"]
 ---
 
 # Flask-restful和Flask-sqlalchemy

@@ -3,6 +3,7 @@ title: "Hugo学习"
 showDate: true
 date: 2018-10-29T17:10:07+08:00
 tags: ["hugo"]
+categories: ["hugo"]
 draft: false
 ---
 

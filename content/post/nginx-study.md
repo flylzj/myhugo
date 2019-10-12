@@ -4,6 +4,7 @@ date: 2018-11-04T10:23:42+08:00
 showDate: true
 draft: false
 tags: ["nginx","linux"]
+categories: ["linux"]
 ---
 
 # Nginx配置学习总结
@@ -147,8 +148,8 @@ uri为待匹配的字符串，可以为正则表达式也可以为正则表达�
 
 通过强大的nginx，我把自己的服务都跑在docker里，通过只能127.0.0.1:ip访问，然后用nginx给这些服务做反代，配上子域名，这样所有的服务在我服务器就只有一个入口了。配置文件和效果图如下
 
-![nginx主配置文件](../nginx_conf.png)
+![nginx主配置文件](./nginx_conf.png)
 
-![nginx博客配置文件](../nginx_blog_conf.png)
+![nginx博客配置文件](./nginx_blog_conf.png)
 
-![nginx效果图](../nginx.png)
+![nginx效果图](./nginx.png)

@@ -2,6 +2,8 @@
 title: "A Go Spider"
 date: 2018-11-21T21:06:42+08:00
 showdate: true
+tags: ["golang", "spider"]
+categories: ["golang"]
 ---
 
 最近两周学了下golang，看了下基础语法（暑假留校的时候就已经看过了，但是因为有其它项目要做所以就没有了后续），对go有了一定的了解，听说go的goroutine对并发很友好。为了巩固对自己的go语言学习，花了一周的时间写了个go的爬虫。

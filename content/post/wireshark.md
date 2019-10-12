@@ -3,7 +3,8 @@ title: "用Wireshark看http下层的tcp"
 date: 2019-03-24T08:34:32+08:00
 showDate: true
 draft: False
-tags: ["blog","story"]
+tags: ["network","tcp"]
+categories: ["network"]
 ---
 
 ## 前言

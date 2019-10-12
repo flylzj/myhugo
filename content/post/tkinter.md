@@ -3,7 +3,8 @@ title: "Tkinter"
 date: 2018-11-16T17:12:54+08:00
 showDate: true
 draft: false
-tags: ["python"]
+tags: ["python", "tkinter"]
+categories: ["python"]
 ---
 
 # tkinter学习总结
@@ -49,7 +50,7 @@ Toplevel相当于一个二级窗口,一般用在开启一个子窗口.
 ```
 
 效果是这样的
-![toplevel](../tkinter-toplevel.png)
+![toplevel](./tkinter-toplevel.png)
 
 ### Button
 
@@ -80,7 +81,7 @@ checkbutton,选择按钮,用来添加选择选项.
 这里用for循环来创建一定数量的checkbutton,is_sche是一个Boolean类型,如果为true,checkbutton就变成已选并且不可选状态.
 
 效果如下:
-![checkbutton](../tkinter-checkbutton.png)
+![checkbutton](./tkinter-checkbutton.png)
 
 ### Entry
 
@@ -151,7 +152,7 @@ menu就是普通的菜单.感觉菜单可以看成装了很多button的一个容
 
 效果如下(好丑哇:
 
-![menu](../tkinter-menu.png)
+![menu](./tkinter-menu.png)
 
 ### Radiobutton
 
@@ -164,7 +165,7 @@ menu就是普通的菜单.感觉菜单可以看成装了很多button的一个容
 ```
 
 效果:
-![radiobutton](../tkinter-radiobutton.png)
+![radiobutton](./tkinter-radiobutton.png)
 
 ## 还有一些ttk里面的组件
 
@@ -198,7 +199,7 @@ Treeview相当于是创建一个表格,由表头和列组成,每一行都算作�
 ```
 
 效果:
-![treeview](../tkinter-treeview.png)
+![treeview](./tkinter-treeview.png)
 
 ## 部件装填
 

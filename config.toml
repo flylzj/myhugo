@@ -3,8 +3,8 @@ languageCode            = "zh-cn"
 defaultContentLanguage  = "zh"
 isMultilingual          = true
 title                   = "fly thief"
-theme                   = "sam"
-pygmentsStyle           = "monokai"                     # https://help.farbox.com/pygments.html
+theme                   = "bilberry"
+pygmentsStyle           = "maupassant"                     # https://help.farbox.com/pygments.html
 pygmentsCodefences      = true
 googleAnalytics         = "UA-123141655-2"             # Tracking code, eg. "UA-111111111-1"
 hasCJKLanguage           = true
@@ -25,6 +25,10 @@ hasCJKLanguage           = true
 # Metadata
     description         = " "            # Max 160 characters show in search results
     primaryImage        = "lzj.jpg"                     # Image that shows on Twitter cards and OpenGraph links
+
+# bilberry config
+algolia_search = false
+enable_mathjax = true
 
 [[params.mainMenu]]
     link = "/posts/python"

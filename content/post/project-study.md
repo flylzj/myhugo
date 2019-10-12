@@ -2,8 +2,9 @@
 title: "记一次小项目经历"
 date: 2018-12-04T16:02:26+08:00
 showDate: true
-draft: true
-tags: ["golang","爬虫"]
+draft: flase
+tags: ["golang","spider"]
+categories: ["golang"]
 ---
 
 # 开始
