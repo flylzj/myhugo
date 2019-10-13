@@ -165,7 +165,25 @@ def get_username_word(idx, a):
 
 ![2-7](2-7.png)
 
+#### flag 2
 
+拿到第一个flag之后，找了好久，发现目前可访问的url只有
+
+```
+/home       200
+/page/1     200
+/page/2     200
+/page/3     401
+/login      200
+```
+
+里面也没什么重要的信息，然后尝试访问第一个版本存在的`/page/edit/1`，发现直接重定向到了`/login`，login之后也就只有一个flag并没有后续信息，我尝试把flag当cookie访问`/page/edit/1`,结果还是重定向。
+
+![2-8](2-8.png)
+
+好像卡住了，突然没有了方向。再看了一眼第二关的CMS，它好像有个`POST /page/edit/1`，于是我试了一下POST，果然第二个flag在这。
+
+![2-9](2-9.png)
 
 
 未完待续~
