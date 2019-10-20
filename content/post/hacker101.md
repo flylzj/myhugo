@@ -267,6 +267,7 @@ SELECT 1
 
 ### 第五关 Photo Gallery
 
+#### flag1
 
 这关一进去看起来是一个图片展示的网页，三张图片，两个正常显示，一张500，看了下图片的地址。
 
@@ -405,6 +406,114 @@ sqlmap --threads 10 -u "http://35.227.24.107/479b051cb9/fetch?id=1" -D level5 -T
 
 提交发现果然是个flag。
 
-未完待续~
+#### flag2
+
+距离上一个flag已经过去两天了，在过去的两天我尝试了各种办法，甚至用sqlmap把他的数据库都脱下来了，依然没有头绪。但是有几个突破口。
+
+1. 尝试用load_file和into outfile来向文件系统读写文件，但是数据库的默认是设置secure_file_priv为null或者指定位置，并不能随意读写文件。于是放弃了。
+2. 从photos表的filename可以看出，代码应该是读出filename的值然后从文件系统中读取图片内容并返回，所以`id=3`才会500。通过这点，我尝试了payload` union select '/etc/passwd'`，但是报了500。于是也放弃了。
+
+今天看了两个hint
+
+* Consider how you might build this system yourself. What would the query for fetch look like?
+* Take a few minutes to consider the state of the union
+
+这两个hint我感觉还是想让我从利用union读取系统文件入手。
+
+因为之前第三关的sql注入爆出来的代码是python，我于是随手试了一下` union select 'main.py'`，果然是皇天不负有心人，直接爆出了源码，然后注释里有flag
+
+![2-11.png](2-11.png)
+
+#### flag3
+
+第二个flag里爆出了服务端的代码，看起来是想我们从源码入手。
+
+代码里唯一有用户输入的一段只有`GET /fetch`这个api，代码如下
+
+```python
+@app.route('/fetch')
+def fetch():
+	cur = getDb().cursor()
+	if cur.execute('SELECT filename FROM photos WHERE id=%s' % request.args['id']) == 0:
+		abort(404)
+
+	# It's dangerous to go alone, take this:
+	# ^FLAG^c9ca117fc9876a4d0b1b09a76b8c3f1136e03dce5de40222400eed4f1c90e50f$FLAG$
+
+	return open('./%s' % cur.fetchone()[0].replace('..', ''), 'rb').read()
+```
+
+最后一句把输入的filename强行绑定在了当前目录，我开始的想法是看能不能通过某些字符串来绕过`str.replace()`，google了好久也没有结果。
+
+然后我想能不能在select后面跟一个update语句，尝试构造payload
+
+`;update photos set filename='files/adorable.jpg' where id=3;`
+
+把id=3的filename改成id=1的filename，提交完之后刷新index页面，没有反应。
+
+google了一会儿我发现了一个叫做[Stacked injection](http://www.sqlinjection.net/stacked-queries/)的攻击方式。原来我上面的payload之所以没有反应是因为update语句一般需要加上commit
+
+在找第二个flag的时候其实我也是过类似的payload
+
+`;drop table photos`,而且甚至导致服务器直接500了，但是当时也没多想。于是构造payload
+
+`;update photos set filename='files/adorable.jpg' where id=3;commit;`
+
+再访问index页面，果然第三个图片变成了第一个图片。
+
+既然能改数据库数据，那我的修改肯定也能影响下面的index路由了
+
+```python
+@app.route('/')
+def index():
+	cur = getDb().cursor()
+	cur.execute('SELECT id, title FROM albums')
+	albums = list(cur.fetchall())
+
+	rep = ''
+	for id, title in albums:
+		rep += '<h2>%s</h2>\n' % sanitize(title)
+		rep += '<div>'
+		cur.execute('SELECT id, title, filename FROM photos WHERE parent=%s LIMIT 3', (id, ))
+		fns = []
+		for pid, ptitle, pfn in cur.fetchall():
+			rep += '<div><img src="fetch?id=%i" width="266" height="150"><br>%s</div>' % (pid, sanitize(ptitle))
+			fns.append(pfn)
+		rep += '<i>Space used: ' + subprocess.check_output('du -ch %s || exit 0' % ' '.join('files/' + fn for fn in fns), shell=True, stderr=subprocess.STDOUT).strip().rsplit('\n', 1)[-1] + '</i>'
+		rep += '</div>\n'
+
+	return home.replace('$ALBUMS$', rep)
+```
+
+代码里看起来是要du命令并返回结果，ubuntu里`du --help`看一下
+
+
+```
+
+-c, --total           produce a grand total
+-h, --human-readable  print sizes in human readable format (e.g., 1K 234M 2G)
+```
+
+看来是打印三个文件的总大小然后返回输出结果的最后一行。fns是三个filename构成的列表，我只要把filename改造成我想要命令就能执行并返回了。
+
+先构造fns，把id=3的filename改成`|| cat /etc/passwd`，页面里回显了，`/etc/passwd`的最后一行
+
+![2-12.png](2-12.png)
+
+看起来我需要把内容都显示在一行才行，查了一下可以通过管道用`xargs`就能单行输出了，先构造payload
+
+`;update photos set filename='cat /etc/passwd|xargs' where id=3;commit;`
+
+然后访问index页面，这下内容都出来了。
+
+![2-13.png](2-13.png)
+
+但是好像没有flag，再找找其他地方。找了好几个地方，最后在环境变量里面找到了，原来三个flag都在这，payload为
+
+`;update photos set filename='export|xargs' where id=3;commit;`
+
+![2-14.png](2-14.png)
+
+历时一周，第五关完结~
 
 

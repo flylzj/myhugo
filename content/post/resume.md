@@ -1,15 +1,4 @@
----
-title: "一份简历"
-date: 2018-12-05T16:44:07+08:00
-showDate: true
-draft: false
-tags: ["resume"]
-categories: ["resume"]
----
 
-# 个人简历
-
-***
 
 * ## 个人信息：
     * ### 基本信息：
@@ -25,7 +14,7 @@ categories: ["resume"]
 
         * 学校：南昌大学
         * 学历：本科
-        * 专业：生物工程
+        * 专业：生物工程&&计算机技术双学位
         * 入学时间：2016.9
         * 毕业时间：2020.7
         * 英语水平：通过CET4
@@ -37,9 +26,6 @@ categories: ["resume"]
         * 熟悉flask以及rest风格的第三方库flask-restful
         * 熟悉orm框架sqlalchemy的使用
         * 掌握Scrapy爬虫框架
-        * 了解Python2
-        * 了解并日常遵守PEP8规范
-        * 对pandas，numpy，matplotlib有一定了解
 
     * Golang
 
@@ -47,20 +33,15 @@ categories: ["resume"]
         * 掌握go后端开发的基本技能
         * 掌握基于goroutine的go并发编程
 
-    * Mysql
-
-        * 熟悉mysql基本操作
-        * 了解mysql主流引擎
-        * 了解mysql的优化
-
     * Other
 
         * 熟悉docker容器
         * 熟悉nginx作为http服务器，反向代理服务器的基本配置
         * 熟悉http协议
         * 熟悉git基本操作
+        * 掌握mysql和redis的基本使用
         * 掌握linux，日常开发使用Windows/ArchLinux
-        * 了解HTML/CSS/Javascript
+        * 掌握HTML/CSS/Javascript
 
 * ## 项目经历：
 
