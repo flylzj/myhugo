@@ -13,7 +13,7 @@ paginate = 5              # Number of articles displayed on the homepage  # 首�
 rssLimit = 20             # Limit Entry Count to Rss file # 限制 Rss 文章输出数量
 disqusShortname = ""      # disqus_shortname
 googleAnalytics = "UA-123141655-2"      # UA-XXXXXXXX-X
-copyright = "flythief"            # default: author.name ↓        # 默认为下面配置的author.name ↓
+copyright = "<a href='http://www.beian.miit.gov.cn'>赣ICP备18014059号</a>"            # default: author.name ↓        # 默认为下面配置的author.name ↓
 
 # language support # en / zh-cn / other... translations present in i18n/
 defaultContentLanguage = "en"           # Default language to use
@@ -57,7 +57,7 @@ defaultContentLanguage = "en"           # Default language to use
 [params]
   since = "2019"            # Site creation time          # 站点建立时间
   homeFullContent = false   # if false, show post summaries on home page. Othewise show full content.
-  rssFullContent = true     # if false, Rss feed instead of the summary
+  rssFullContent = false     # if false, Rss feed instead of the summary
   favicon        = "favicon.ico"
 
   # site info (optional)                                  # 站点信息（可选，不需要的可以直接注释掉）
@@ -85,11 +85,11 @@ defaultContentLanguage = "en"           # Default language to use
     clientId = "825a98039176de14a9f8"           # Your client ID
     clientSecret = "9c9724561c41efd707f046fe86acb5b4945f5470"       # Your client secret
 
-[params.counter.busuanzi]  # a Chinese visitor counter  # 不蒜子计数器 记录阅读数量
-    enable = true
+# [params.counter.busuanzi]  # a Chinese visitor counter  # 不蒜子计数器 记录阅读数量
+#     enable = true
 
   [params.social]                                         # 社交链接
-    a-email = "1449902124@qq.com"
+    # a-email = "1449902124@qq.com"
     # b-stack-overflow = "http://localhost:1313"
     # c-twitter = "http://localhost:1313"
     # d-facebook = "http://localhost:1313"
