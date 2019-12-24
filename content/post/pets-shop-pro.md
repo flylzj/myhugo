@@ -180,3 +180,5 @@ ERROR: Only PNG format supported in trial.
 
 然后我又在burp里跑了一下前面那个xargs命令，原来并不是没有，只是浏览器不显示注释。
 以后还是直接看burp吧。
+
+
