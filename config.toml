@@ -79,11 +79,11 @@ defaultContentLanguage = "en"           # Default language to use
   customCSS = []            # if ['custom.css'], load '/static/css/custom.css' file
   customJS = []             # if ['custom.js'], load '/static/js/custom.js' file
 
-[params.gitment]          # Gitment is a comment system based on GitHub issues. see https://github.com/imsun/gitment
-    owner = "flylzj"              # Your GitHub ID
-    repo = "https://github.com/flylzj/myhugo"               # The repo to store comments
-    clientId = "825a98039176de14a9f8"           # Your client ID
-    clientSecret = "9c9724561c41efd707f046fe86acb5b4945f5470"       # Your client secret
+# [params.gitment]          # Gitment is a comment system based on GitHub issues. see https://github.com/imsun/gitment
+#     owner = "flylzj"              # Your GitHub ID
+#     repo = ""               # The repo to store comments
+#     clientId = ""           # Your client ID
+#     clientSecret = ""       # Your client secret
 
 # [params.counter.busuanzi]  # a Chinese visitor counter  # 不蒜子计数器 记录阅读数量
 #     enable = true
