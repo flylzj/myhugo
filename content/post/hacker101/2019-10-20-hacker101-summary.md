@@ -1,11 +1,14 @@
 ---
-title: "Hacker101总结"
+title: "Hacker101 前6关总结"
 date: 2019-10-20T16:39:55+08:00
-draft: flase
+showDate: true
+draft: false
+tags: ["security","hacker101", "ctf"]
+categories: ["security"]
 ---
 
 
-# hacker101前5关总结
+# hacker101前6关总结
 
 ## 常见web漏洞
 
