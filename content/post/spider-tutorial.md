@@ -380,10 +380,258 @@ Process finished with exit code 0
 
 #### 3.2.1.2 编写model
 
+```python
+# coding: utf-8
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column, String, Integer, ForeignKey
+from sqlalchemy.orm import relationship
+
+Base = declarative_base() # 创建一个数据表的基类
+
+class Fund(Base):
+    '''
+    funds表的模型
+    '''
+
+    __tablename__ = 'funds' # 表名
+
+    id = Column(Integer, primary_key=True) # id字段，主键
+    code = Column(String(32), index=True, nullable=False) # code字段， 索引， 不能为空
+    name = Column(String(128), nullable=False) # name字段，不能为空
+
+    archives = relationship('FundArchive') # 一对多关系，通过这个字段可以获取这个基金投资的所有股票
+
+
+class Stock(Base):
+    '''
+    stocks表模型
+    '''
+    __tablename__ = 'stocks' # 表名
+
+    id = Column(Integer, primary_key=True) # id字段，主键
+    code = Column(String(32), index=True, nullable=False) # code字段， 索引， 不能为空
+    name = Column(String(128), nullable=False) # name字段，不能为空
+
+    archives = relationship('FundArchive') # 一对多关系，通过这个字段可以获取投资这个股票的所有基金
+
+class FundArchive(Base):
+    '''
+    fund_archives表模型，用于记录所有的基金持仓
+    '''
+
+    __tablename__ = 'fund_archives'
+
+    id = Column(Integer, primary_key=True) # id字段，主键
+    fund_id = Column(Integer, ForeignKey('funds.id')) # 外键，来自funds表的id字段
+    stock_id = Column(Integer, ForeignKey('stocks.id')) # 外键，来自stocks表的id字段
+
+
+if __name__ == '__main__':
+    from sqlalchemy import create_engine
+    engine = create_engine("mysql+pymysql://root:123456@localhost/eastmoney") # 创建数据库引擎
+    Base.metadata.bind = engine # 为开始创建的基类绑定数据库引擎
+    Base.metadata.create_all()  # 创建所有还没有创建的表
+```
+
+在`model.py`中，我们定义了三个类，每个类都对应数据库中的一个表，每个Column相当于数据库中的列，带有foreignkey的是外键。
+
+尝试运行这个model.py，就会自动在数据库中自动建表了。
+
+这时候我们的数据库就多出来了三张表，刚好对应上面的三个类
+
+![19](19.png)
+
+#### 3.2.1.3 编写db类
+
+这个类我们的需求是用它来初始化数据库，查找，插入数据。
+
+所以需要的方法应该有
+
+*   `__init__`方法，初始化一些属性
+* `_get_engine`方法，获取连接数据库的引擎
+* `init_db`，初始化数据库
+* `query`, 查询数据
+* `insert`，插入数据
+
+下面开始一个一个写方法
+
+`_get_engine`方法
+
+这个方法没太多好讲的，可以看成是连接数据库
+
+```python
+    def _get_engine(self):
+        db_host = 'localhost'   # 数据库地址
+        db_user = 'root'    # 账号
+        db_password = '123456'  # 密码
+        db_db = 'eastmoney' # 数据库
+        mysql_uri = 'mysql+pymysql://{}:{}@{}/{}'.format(
+            db_user, db_password, db_host, db_db
+        )   # 构造uri
+        try:
+            engine = create_engine(mysql_uri)   # 生成数据库引擎
+            return engine   # 返回引擎用于生成Session
+        except Exception as e:
+            print('get engine error', e)
+            return None
+```
+
+`init_db`方法
+
+这个方法用于初始化数据库，意思是如果第一次运行代码，这个方法可以自动帮我们建表，如果我们想删除表重新创建，只要把传入的参数drop设为true就可以了。
+
+```python
+    def init_db(self, drop=False):
+        Base.metadata.bind = self._get_engine()
+        if drop:    # 如果drop为true就删除数据库中所有的表
+            Base.metadata.drop_all()
+        Base.metadata.create_all()
+```
+
+`__init__`方法，创建一个_Session属性，相当于是与数据库的会话，用它来查询，插入数据。
+
+```python
+    def __init__(self):
+        self.init_db()
+        engine = self._get_engine()
+        self._Session = sessionmaker(bind=engine)
+```
+
+`query`和`insert`方法，
+
+这两个方法一个是查询一个是插入，通过第一个参数来控制查询/插入的表名
+query方法的count参数是控制查询结果返回的数据条数。
+
+```python
+    def query(self, t, count=1, **kwargs):
+        '''
+        这个方法可以查找所有的表
+        :param t:
+        :param count:
+        :param kwargs:
+        :return:
+        '''
+        if t == 'fund':
+            table = Fund
+        elif t == 'stock':
+            table = Stock
+        else:
+            table = FundArchive
+
+        session = self._Session()    # 创建一个session实例
+        try:
+            res = session.query(table).filter_by(**kwargs)
+            if count == -1:
+                return res.all()
+            elif count == 1:
+                return res.first()
+            else:
+                return res.limit(count)
+        except Exception as e:
+            print('query error', e)
+        finally:
+            session.close()
+
+    def insert(self, t, **kwargs):
+        if t == 'fund':
+            table = Fund
+        elif t == 'stock':
+            table = Stock
+        else:
+            table = FundArchive
+        # table是三个模型中的其中一个，用kwargs来创建数据项
+        table_ = table(**kwargs)
+        session = self._Session()
+        try:
+            session.add(table_)
+            session.commit()
+        except IntegrityError as e:
+            print('该数据已存在于数据库中')
+        except Exception as e:
+            print(type(e))
+            print('insert error', e)
+        finally:
+            session.close()
+```
+
+最后加上一段测试代码
+
+```python
+if __name__ == '__main__':
+    db = Db()
+    db.insert('fund', code='123', name='123')
+    db.insert('stock', code='1', name='stock123')
+    db.insert('fund_archives', fund_code='123', stock_code='1')
+```
+
+执行这段代码，数据库中的三个表都会有一条数据。
+
+### 3.2.2 编写main函数
+
+现在三个类我们都已经写完了，我们还需要写一个程序的入口，把三个类串起来。
+代码如下
+
+```python
+# coding: utf-8
+from eastmoney import Eastmoney
+from db import Db
+
+def run():
+    em = Eastmoney()    # 创建一个Eastmoney实例，用于爬取数据
+    db = Db()   # 创建一个Db实例，用于把数据存入数据库
+    funds = em.get_fund_codes() # 获取所有基金
+    for fund in funds:  # 遍历所有基金
+        if db.insert('fund', code=fund.get('fund_code'), name=fund.get('fund_name')):   # 把基金插入数据库中
+            print('插入基金', fund.get('fund_name'), '成功')
+        stocks = em.get_fund_archives_data(fund.get('fund_code'))    # 获取该基金的所有股票
+        for stock in stocks:    # 遍历所有股票
+            if db.insert('stock', code=stock.get('stock_code'), name=stock.get('stock_name')):    # 插入该股票进数据库
+                print('插入股票 ', stock.get('stock_name'), '成功')
+            if db.insert('fund_archives', fund_code=fund.get('fund_code'), stock_code=stock.get('stock_code')): # 把该基金持有该股票的关系插入数据库
+                print('插入{}持有{}关系成功'.format(fund.get('fund_code'), stock.get('stock_code')))
+    print('爬取完成')
+
+if __name__ == '__main__':
+    run()
+```
 
 ## 4. 测试运行
 
+最后我们只要运行`run.py`就能自动把数据存入数据库了。运行截图如下
+
+![20](./20.png)
+
 ## 5. 项目打包&&部署
+
+关于项目的打包，我们可以用pyinstaller把py转换成exe，这样在没有安装python的电脑中也可以使用了。
+
+首先我们先安装pyinstaller和pywin32，直接`pip install pyinstaller`
+
+![21](./21.png)
+
+此外，我们还需要在`db.py`中导入pymysql，原因是我们使用的orm框架sqlalchemy，它在代码中隐式地导入了pymysql，打包的时候pyinstaller不会自动导入，
+所以如果不导入这个，生成的exe会无法运行。
+
+输入`import pymysql`
+
+![22](./22.png)
+
+然后运行`pyinstaller -F run.py`
+
+F参数指的是打包成单个文件
+
+打包完现在项目目录多了一个build文件夹和一个dist文件夹，生成的exe文件在dist文件夹中。
+
+我们在文件资源管理器中找到它，双击运行就可以了。
+
+![25](25.png)
+
+### 最终源码
+
+上面的代码跟最终源码可能有一些出入，有一些微调，可以点击下面的链接下载源码
+
+[eastmoney](./eastmoney.zip)
+
 
 
 
