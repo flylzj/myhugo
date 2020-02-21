@@ -4,6 +4,10 @@ date: 2020-01-12T12:25:43+08:00
 draft: false
 ---
 
+## 0.前言
+
+这是一篇写给新手朋友的爬虫教学，没什么干货，非新手绕道了。
+
 ## 1. 需求分析
 
 我们的需求是爬取所有基金的股票持仓数据。这个数据是访问类似[`http://fundf10.eastmoney.com/ccmx_006177.html`](http://fundf10.eastmoney.com/ccmx_006177.html)这种链接看到的。
