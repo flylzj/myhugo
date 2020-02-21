@@ -2,7 +2,7 @@
 title: "Hack the Box——Interdimensional Internet"
 date: 2020-02-21T09:33:17+08:00
 showDate: true
-draft: false
+draft: true
 tags: ["security","hack the box", "ctf"]
 categories: ["security"]
 ---
