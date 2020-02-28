@@ -7,7 +7,6 @@ title: 关于我
 * 学生
 * Pythoner
 * 游戏宅
-* 联盟爱好者
 
 <br/>
 <br/>
