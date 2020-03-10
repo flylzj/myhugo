@@ -59,3 +59,10 @@ draft: false
 通俗易懂的教程，相对比较短，适合零基础小白入门编程世界。
 
 <https://www.bilibili.com/video/av4050443>
+
+
+### Python语言程序设计
+
+中国大学mooc上北京理工大学嵩天老师的《Python语言程序设计》，如果你是为了二级考试、期末考试，可以刷刷这个，这个老师是python二级的推动者。
+
+<https://www.icourse163.org/course/BIT-268001>
