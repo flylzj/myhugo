@@ -90,3 +90,63 @@ object(stdClass)#1 (1) {
 
 ![2.png](2.png)
 
+
+## 0x05 解决问题
+
+理论上应该可以用sqlmap自定义tamper去跑的，但是这里我用的是自己写盲注脚本，花了我一晚上的时间。
+
+```
+# coding: utf-8
+proxies = {
+    "http": "http://127.0.0.1:8080"
+}
+SLEEP_TIME = 1
+
+def make_payload_text(payload): // 构造payload（转unicode字符串）
+    return text
+
+def request_server(text): // 请求服务器返回响应时间
+    return spend_time
+
+def guess_text(payload: str, text_length=10, sleep_time=SLEEP_TIME): // 猜字符串内容
+    return guess_text
+
+def guess_length(payload, sleep_time=SLEEP_TIME): // 猜字符串长度
+    return v
+
+def guess_database(): // 猜数据库名
+    return text
+
+def guess_tables(database): // 猜表名
+    # db_m8452
+    return tables
+
+def guess_table_col(table): // 猜列名
+    return columns
+
+def guess_data(table, columns): // 猜数据
+  return data
+
+if __name__ == '__main__':
+    db = guess_database()
+    tables = guess_tables(db)
+    data = {}
+    for table in tables:
+        columns = guess_table_col(table)
+        data_list = guess_data(table, columns)
+        data[table] = {
+            "columns": columns,
+            "data": data_list
+        }
+    print(data)
+```
+
+这套代码如果以后遇到基于时间的盲注还可以复用，也不算太浪费吧。
+
+最后脚本跑出来的结果
+
+![3.png](3.png)
+
+0x06 总结
+
+因为一开始对这题没有任何思路，所以一直在google和百度，但是都没有找到解决办法，但是也乘机见识了很多新的姿势，比如各种绕过，还有那个最大回溯攻击等等。也不算太亏吧。
