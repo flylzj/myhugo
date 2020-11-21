@@ -96,12 +96,9 @@ if __name__ == '__main__':
 
 ## 0x03 转机
 
-卡了很久，我现在的思路有那么几个
+### 任意文件读取（伪
 
-1. 上传那块，是不是可以通过上传某些字符来base64产生我们想要的字符串
-2. session那块是不是可以通过爆破来拿到他的密钥从而伪造session
-
-但是带着这两个思路搜了很久都没有进展。
+带着前面的几个发现搜了很久都没有进展。
 
 在无聊刷新界面的时候，我发现，在访问带有php后缀的路径的时候和其它路径的时候响应虽然都是404，但是内容确实不一样的。
 
@@ -124,13 +121,78 @@ php后缀响应的是这样的
 
 这个思路是在下班回家的地铁上突然想到的，但是地铁上信号不好，访问老是超时，到家了我立马试了试。
 
-芜湖，起飞~
-
 ![9.png](9.png)
 
-可以看到，响应内容不是404，只是base64那里可能是因为不是图片然后报错了，但起码证明，思路对了。
+可以看到，响应内容不是404，只是base64那里可能是因为不是图片然后报错了。虽然可以读取任意文件，但是读不出来内容，好像也没有什么卵用~
+
+### session可控
+
+再一次深入进去研究他的session，我发现如果稍微在解码后的json里面加入或删除一点东西，再编码后放回去，拼成的完整`PHPSESSID`也能通过校验。
+
+最后发现后面的签名好像是只和解码后字符串的前57个字符有关，后面的不管怎么修改都不会影响。
+
+![10.png](10.png)
+
+另外，在仔细研究他的session的时候发现，session里的两个字段，`files`存的应该是以你这个username上传的图片列表，最多只有五个，应该是最近的五个。
+
+![11.png](11.png)
+
+既然username可控，那就可以改成任意数据了，这里首先想到的是注入，因为他这些数据应该是存在数据库里，然后通过username这个字段来读的，所以可能会有注入什么的，但是试了几个payload，都无效。
+
+然后尝试输入username的一些边界值，得到以下结论
+
+1. username如果是复合类型（array，object），那username的值会变成`Array`。
+2. username的长度如果超过255，上传图片之后这username的files列表不会增加数据，应该是数据库插入失败了。
+3. 如果username的值是false，会被转为空字符串，如果值是null会报错并返回随机username，应该是调用了isset方法，如果null的话isset会返回false。
+
+经过这些结论，又产生了一个疑问，我在本地传入object的时候，用字符串拼接的话object应该会得到一个`Recoverable fatal error: Object of class stdClass could not be converted to string`错误才对，这里不仅没有报错，还把object转成了`Array`，属实有点疑惑。session到这里也卡住了。
+
+### phpinfo
+
+陷入了不知道干嘛的境遇，想着不如扫一下目录看看，是不是有什么东西遗漏了，没想到还真的扫出来了东西
+
+```
+===
+
+============================================================
+2020/09/19 01:51:32 Starting gobuster
+===============================================================
+/assets (Status: 301)
+/controllers (Status: 301)
+/info (Status: 200)
+/models (Status: 301)
+/proxy (Status: 403)
+/static (Status: 301)
+/uploads (Status: 403)
+/uploads2 (Status: 403)
+/uploads_admin (Status: 403)
+/uploads_event (Status: 403)
+/uploads_forum (Status: 403)
+/uploads_video (Status: 403)
+/uploads_group (Status: 403)
+/uploads_user (Status: 403)
+/views (Status: 301)
+```
+
+但是这里面只有`/info`是可以正常访问的，其它都不行，info返回的是phpinfo界面。
+
+![13.png](13.png)
+
+这里面我感觉有用的只有`$_SERVER['DOCUMENT_ROOT']`，这个让我知道了网站的绝对路径，前面的任意文件读取如果后续能用的话这个路径应该有用，其它的暂时不知道有什么用。
+
+
+
+## 0x04 整理
+
+现在已知的漏洞有
+
+1. 伪任意文件读取
+2. 可以控制的session中的username
+3. phpinfo信息泄露
+
 
 
 ## 0x0
+
 
 [PNG文件结构分析 ---Png解析](https://www.cnblogs.com/lidabo/p/3701197.html)
