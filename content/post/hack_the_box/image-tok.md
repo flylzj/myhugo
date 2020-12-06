@@ -2,7 +2,7 @@
 title: "Image Tok"
 date: 2020-09-17T21:22:55+08:00
 showDate: true
-draft: false
+draft: true
 tags: ["security","hack the box", "ctf"]
 categories: ["security"]
 ---
