@@ -23,7 +23,7 @@ categories: ["security"]
 把代码clone到我的vps，原来的代码随机从filelist元组随机取文件来读，得改造成读我们想要的文件。
 
 把
-```
+```python
 filelist = (
     '/etc/passwd',
 )
@@ -32,7 +32,7 @@ filename = random.choice(filelist)
 ```
 
 改成
-```
+```python
 file_index = 0
 filelist = []
 with open("file.txt") as f:

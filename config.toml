@@ -13,7 +13,15 @@ paginate = 5              # Number of articles displayed on the homepage  # 首�
 rssLimit = 20             # Limit Entry Count to Rss file # 限制 Rss 文章输出数量
 disqusShortname = ""      # disqus_shortname
 googleAnalytics = "UA-123141655-2"      # UA-XXXXXXXX-X
-copyright = "<a href='http://www.beian.miit.gov.cn'>赣ICP备18014059号</a>"            # default: author.name ↓        # 默认为下面配置的author.name ↓
+# copyright = "<a href='http://www.beian.miit.gov.cn'>赣ICP备18014059号</a>"            # default: author.name ↓        # 默认为下面配置的author.name ↓
+
+
+# Highlight options.
+# See https://gohugo.io/content-management/syntax-highlighting/
+PygmentsCodeFences = true # Enable syntax highlighting with GitHub flavoured code fences
+PygmentsUseClasses = true # Use CSS classes to format highlighted code
+PygmentsCodefencesGuessSyntax = true
+PygmentsOptions = "linenos=table"
 
 # language support # en / zh-cn / other... translations present in i18n/
 defaultContentLanguage = "en"           # Default language to use
@@ -55,7 +63,7 @@ defaultContentLanguage = "en"           # Default language to use
 
 
 [params]
-  since = "2019"            # Site creation time          # 站点建立时间
+  since = "2018"            # Site creation time          # 站点建立时间
   homeFullContent = false   # if false, show post summaries on home page. Othewise show full content.
   rssFullContent = false     # if false, Rss feed instead of the summary
   favicon        = "favicon.ico"
@@ -72,21 +80,21 @@ defaultContentLanguage = "en"           # Default language to use
   # Some global options, you can also close or open something in front matter for a single post, see more information from `archetypes/default.md`.
   toc = true                                                                            # 是否开启目录
   photoswipe = true         # see https://github.com/dimsemenov/PhotoSwipe            # 是否启用PhotoSwipe（图片可点击）
-  contentCopyright = ''
+  contentCopyright = '<a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a>'
 
   # Link custom CSS and JS assets
   #   (relative to /static/css and /static/js respectively)
   customCSS = []            # if ['custom.css'], load '/static/css/custom.css' file
   customJS = []             # if ['custom.js'], load '/static/js/custom.js' file
 
-# [params.gitment]          # Gitment is a comment system based on GitHub issues. see https://github.com/imsun/gitment
-#     owner = "flylzj"              # Your GitHub ID
-#     repo = ""               # The repo to store comments
-#     clientId = ""           # Your client ID
-#     clientSecret = ""       # Your client secret
+[params.gitment]          # Gitment is a comment system based on GitHub issues. see https://github.com/imsun/gitment
+    owner = "flylzj"              # Your GitHub ID
+    repo = "myhugo"               # The repo to store comments
+    clientId = "7f0da52681b8d79172a9"           # Your client ID
+    clientSecret = "d94137994478e3b2af76e59da3a3e519505f8305"       # Your client secret
 
-# [params.counter.busuanzi]  # a Chinese visitor counter  # 不蒜子计数器 记录阅读数量
-#     enable = true
+[params.counter.busuanzi]  # a Chinese visitor counter  # 不蒜子计数器 记录阅读数量
+    enable = true
 
   [params.social]                                         # 社交链接
     # a-email = "1449902124@qq.com"
