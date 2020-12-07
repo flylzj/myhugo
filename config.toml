@@ -105,7 +105,7 @@ defaultContentLanguage = "en"           # Default language to use
 #     clientSecret = ""       # Your client secret
   [params.utteranc]         # utteranc is a comment system based on GitHub issues. see https://utteranc.es
     enable = true
-    repo = "flylzj/myhugo"    # The repo to store comments
+    repo = "flylzj/myhugo-comment"    # The repo to store comments
     issueTerm = "pathname"
 
   [params.publicCDN]        # load these files from public cdn                          # 启用公共CDN，需自行定义
