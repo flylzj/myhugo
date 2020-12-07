@@ -122,6 +122,11 @@ defaultContentLanguage = "en"           # Default language to use
 [params.counter.busuanzi]  # a Chinese visitor counter  # 不蒜子计数器 记录阅读数量
     enable = true
 
+# [params.search.google]    # google custom search, see https://cse.google.com
+#     enable = true
+#     id = "dc1ae2402a7409aa7"
+#     title = "Search"
+
   [params.social]                                         # 社交链接
     # a-email = "1449902124@qq.com"
     # b-stack-overflow = "http://localhost:1313"
