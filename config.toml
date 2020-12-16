@@ -120,7 +120,7 @@ defaultContentLanguage = "en"           # Default language to use
     photoswipeSKIN = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css" integrity="sha256-c0uckgykQ9v5k+IqViZOZKc47Jn7KQil4/MP3ySA3F8=" crossorigin="anonymous">'
 
 [params.counter.busuanzi]  # a Chinese visitor counter  # 不蒜子计数器 记录阅读数量
-    enable = true  # 直接用静态文件加载
+    enable = false  # 直接用静态文件加载
 
 # [params.search.google]    # google custom search, see https://cse.google.com
 #     enable = true
