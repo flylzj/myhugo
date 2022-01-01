@@ -13,7 +13,7 @@ paginate = 5              # Number of articles displayed on the homepage  # 首�
 rssLimit = 20             # Limit Entry Count to Rss file # 限制 Rss 文章输出数量
 disqusShortname = ""      # disqus_shortname
 googleAnalytics = "UA-123141655-2"      # UA-XXXXXXXX-X
-# copyright = "<a href='http://www.beian.miit.gov.cn'>赣ICP备18014059号</a>"            # default: author.name ↓        # 默认为下面配置的author.name ↓
+copyright = "<a href='http://www.beian.miit.gov.cn'>赣ICP备18014059号</a>"            # default: author.name ↓        # 默认为下面配置的author.name ↓
 
 
 # Highlight options.
