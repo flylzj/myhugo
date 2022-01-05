@@ -27,4 +27,4 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          script: cd myhugo && hugo
+          script: cd myhugo && git pull && hugo && sudo docker-compose restart
