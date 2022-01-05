@@ -4,9 +4,6 @@ title: 关于我
 
 <link rel="stylesheet" href="../font-awesome/css/font-awesome.min.css">
 
-* Pythoner
-* 游戏宅
-
 <br/>
 <br/>
 <br/>
