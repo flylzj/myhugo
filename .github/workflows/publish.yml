@@ -27,4 +27,4 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          script: cd myhugo && git pull && sudo rm -rf public && sudo hugo && sudo docker-compose restart && curl -s -o /dev/null "http://wx.ckjz.club/wecomchan?sendkey=${{ secrets.SERVERCHAN_KEY }}&msg=hugo部署成功&msg_type=text"
+          script: cd myhugo && git pull && sudo rm -rf public && sudo hugo && sudo docker-compose restart && curl -s -o /dev/null "https://wx.ckjz.club/wecomchan?sendkey=${{ secrets.SERVERCHAN_KEY }}&msg=hugo部署成功&msg_type=text"
