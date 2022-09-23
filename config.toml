@@ -128,7 +128,7 @@ defaultContentLanguage = "en"           # Default language to use
 #     title = "Search"
 
   [params.social]                                         # 社交链接
-    # a-email = "1449902124@qq.com"
+    a-email = "flylzj@qq.com"
     # b-stack-overflow = "http://localhost:1313"
     # c-twitter = "http://localhost:1313"
     # d-facebook = "http://localhost:1313"
