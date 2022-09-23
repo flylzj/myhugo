@@ -27,4 +27,4 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          script: cd myhugo && git pull && hugo && sudo docker-compose restart
+          script: cd myhugo && git pull && sudo rm -rf public && sudo hugo && sudo docker-compose restart && curl "https://sctapi.ftqq.com/${{ secrets.SERVERCHAN_KEY }}.send?title=messagetitle"
