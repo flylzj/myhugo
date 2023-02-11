@@ -1,7 +1,7 @@
 ---
 title: "废弃笔记本利用计划（一）：使用zerotier one打通内外网 && 搭建开源私有云盘"
 showDate: true
-date: 2022-01-04T15:20:27+08:00
+date: 2023-01-04T15:20:27+08:00
 draft: false
 ---
 

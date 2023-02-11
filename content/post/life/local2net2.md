@@ -1,7 +1,7 @@
 ---
 title: "废弃笔记本利用计划（二）：智能家居平台home assistant搭建及使用"
 showDate: true
-date: 2022-01-06T15:20:27+08:00
+date: 2023-01-06T15:20:27+08:00
 draft: false
 ---
 

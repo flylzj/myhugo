@@ -1,7 +1,7 @@
 ---
 title: "Metaverse 6g Edge Ai"
 date: 2022-11-09T22:02:10+08:00
-draft: false
+draft: true
 ---
 
 
